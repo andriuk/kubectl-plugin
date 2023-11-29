@@ -1,0 +1,11 @@
+#!/bin/bash
+
+kubectl top pods --all-namespaces | tail -n +2 | while read line
+do
+  NAMESPACE=$(echo $line | awk '{print $1}')
+  NAME=$(echo $line | awk '{print $2}')
+  CPU=$(echo $line | awk '{print $3}')
+  MEMORY=$(echo $line | awk '{print $4}')
+
+  echo "Namespace: $NAMESPACE, Pod: $NAME, CPU: $CPU, Memory: $MEMORY"
+done 
